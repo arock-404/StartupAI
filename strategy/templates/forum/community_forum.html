@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Community Forum - AI Business Strategy Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #a29bfe;
+            --secondary: #00cec9;
+            --accent: #fd79a8;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --light-bg: #f5f6fa;
+            --white: #ffffff;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #ff7675;
+            --info: #0984e3;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light-bg);
+            background-image: 
+                radial-gradient(var(--primary-light) 1px, transparent 1px),
+                radial-gradient(var(--primary-light) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            background-attachment: fixed;
+            background-blend-mode: soft-light;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .container {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .intro::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .intro h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .intro p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(108, 92, 231, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            color: var(--white);
+            border-color: var(--primary-light);
+            box-shadow: 0 7px 15px rgba(162, 155, 254, 0.4);
+        }
+        
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .forum-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .search-bar {
+            margin-bottom: 30px;
+            display: flex;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 30px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar:focus-within {
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.15);
+        }
+        
+        .search-bar input {
+            flex-grow: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 0 30px 30px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar button:hover {
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+        }
+        
+        .categories {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category {
+            background-color: var(--light-bg);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        .category:hover {
+            background-color: var(--primary-light);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(162, 155, 254, 0.3);
+        }
+        
+        .category.active {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+        }
+        
+        .topic-list {
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .topic-list th {
+            text-align: left;
+            padding: 18px 20px;
+            background: var(--light-bg);
+            border-bottom: 2px solid var(--primary-light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .topic-list td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .topic-list tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .topic-list tr:hover {
+            background-color: rgba(108, 92, 231, 0.03);
+        }
+        
+        .topic-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        
+        .topic-title:hover {
+            color: var(--primary);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .badge-question {
+            background-color: rgba(253, 121, 168, 0.15);
+            color: var(--accent);
+        }
+        
+        .badge-discussion {
+            background-color: rgba(0, 206, 201, 0.15);
+            color: var(--secondary);
+        }
+        
+        .badge-resource {
+            background-color: rgba(253, 203, 110, 0.15);
+            color: var(--warning);
+        }
+        
+        .badge-solved {
+            background-color: rgba(0, 184, 148, 0.15);
+            color: var(--success);
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--white);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        
+        .expert-tag {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            margin-left: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stats {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 8px;
+        }
+        
+        .pagination a {
+            padding: 10px 16px;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .pagination a:hover {
+            background-color: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(162, 155, 254, 0.2);
+        }
+        
+        .pagination a.active {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 5px 10px rgba(108, 92, 231, 0.2);
+        }
+        
+        .featured-experts {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.05), rgba(0, 206, 201, 0.05));
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-experts::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .featured-experts h3 {
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .featured-experts p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .expert-list {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-light) transparent;
+        }
+        
+        .expert-list::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .expert-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .expert-list::-webkit-scrollbar-thumb {
+            background-color: var(--primary-light);
+            border-radius: 6px;
+        }
+        
+        .expert-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 25px 20px;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+        
+        .expert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.1);
+            border-color: rgba(108, 92, 231, 0.2);
+        }
+        
+        .expert-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .expert-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        
+        .expert-specialty {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+        }
+        
+        .expert-stats {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .forum-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .topic-list th:nth-child(3), 
+            .topic-list td:nth-child(3) {
+                display: none;
+            }
+            
+            .intro h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .forum-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .forum-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .topic-list th:nth-child(4),
+            .topic-list td:nth-child(4) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="intro">
+            <h1>Startup Community Forum</h1>
+            <p>Connect with entrepreneurs and experts to get guidance on your startup journey</p>
+        </div>
+        
+        <div class="forum-header">
+            <h2>Discussion Topics</h2>
+            <div class="forum-actions">
+                <a href="#" class="btn btn-secondary">Browse All</a>
+                <a href="#" class="btn">Ask a Question</a>
+            </div>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Search questions or topics...">
+            <button>Search</button>
+        </div>
+        
+        <div class="categories">
+            <div class="category active">All Topics</div>
+            <div class="category">Funding</div>
+            <div class="category">Market Research</div>
+            <div class="category">Product Development</div>
+            <div class="category">Marketing</div>
+            <div class="category">Legal & Compliance</div>
+            <div class="category">Team Building</div>
+        </div>
+        
+        <table class="topic-list">
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Posted By</th>
+                    <th>Stats</th>
+                    <th>Last Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">How do I validate my SaaS startup idea without spending too much?</a>
+                        <div>
+                            <span class="badge badge-question">Question</span>
+                            <span class="badge badge-solved">Solved</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">Alex Johnson</div>
+                                <div>First-time founder</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>12 Responses</div>
+                        <div>87 Views</div>
+                    </td>
+                    <td>2 hours ago</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">What metrics should I focus on for my e-commerce startup in the first 6 months?</a>
+                        <div>
+                            <span class="badge badge-question">Question</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">Sarah Miller</div>
+                                <div>E-commerce entrepreneur</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>8 Responses</div>
+                        <div>54 Views</div>
+                    </td>
+                    <td>5 hours ago</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">Tips for bootstrapping vs seeking angel investment</a>
+                        <div>
+                            <span class="badge badge-discussion">Discussion</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">Michael Chen<span class="expert-tag">Expert</span></div>
+                                <div>3x Founder, Angel Investor</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>23 Responses</div>
+                        <div>142 Views</div>
+                    </td>
+                    <td>Yesterday</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">How to find a technical co-founder for my healthcare startup?</a>
+                        <div>
+                            <span class="badge badge-question">Question</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">Jessica Williams</div>
+                                <div>Healthcare professional</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>15 Responses</div>
+                        <div>98 Views</div>
+                    </td>
+                    <td>2 days ago</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">Ultimate guide to creating your first pitch deck</a>
+                        <div>
+                            <span class="badge badge-resource">Resource</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">David Rodriguez<span class="expert-tag">Expert</span></div>
+                                <div>VC Partner</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>7 Responses</div>
+                        <div>211 Views</div>
+                    </td>
+                    <td>3 days ago</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">Legal requirements for launching a fintech startup</a>
+                        <div>
+                            <span class="badge badge-question">Question</span>
+                            <span class="badge badge-solved">Solved</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">Priya Sharma</div>
+                                <div>Fintech founder</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>19 Responses</div>
+                        <div>124 Views</div>
+                    </td>
+                    <td>4 days ago</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="topic-title">Product-led growth strategies for B2B SaaS startups</a>
+                        <div>
+                            <span class="badge badge-discussion">Discussion</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <img src="/api/placeholder/45/45" alt="User avatar" class="user-avatar">
+                            <div>
+                                <div class="user-name">Rachel Cohen<span class="expert-tag">Expert</span></div>
+                                <div>Growth Strategist</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="stats">
+                        <div>31 Responses</div>
+                        <div>187 Views</div>
+                    </td>
+                    <td>5 days ago</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">Next »</a>
+        </div>
+        
+        <div class="featured-experts">
+            <h3>Featured Experts</h3>
+            <p>Connect with these experienced entrepreneurs and advisors</p>
+            
+            <div class="expert-list">
+                <div class="expert-card">
+                    <img src="/api/placeholder/90/90" alt="Expert avatar" class="expert-avatar">
+                    <div class="expert-name">Michael Chen</div>
+                    <div class="expert-specialty">Funding & Investment</div>
+                    <a href="#" class="btn btn-secondary">View Profile</a>
+                    <div class="expert-stats">253 answers · 97% helpful</div>
+                </div>
+                
+                <div class="expert-card">
+                    <img src="/api/placeholder/90/90" alt="Expert avatar" class="expert-avatar">
+                    <div class="expert-name">Rachel Cohen</div>
+                    <div class="expert-specialty">Growth Strategy</div>
+                    <a href="#" class="btn btn-secondary">View Profile</a>
+                    <div class="expert-stats">187 answers · 95% helpful</div>
+                </div>
+                
+                <div class="expert-card">
+                    <img src="/api/placeholder/90/90" alt="Expert avatar" class="expert-avatar">
+                    <div class="expert-name">David Rodriguez</div>
+                    <div class="expert-specialty">Pitch & Fundraising</div>
+                    <a href="#" class="btn btn-secondary">View Profile</a>
+                    <div class="expert-stats">142 answers · 93% helpful</div>
+                </div>
+                
+                <div class="expert-card">
+                    <img src="/api/placeholder/90/90" alt="Expert avatar" class="expert-avatar">
+                    <div class="expert-name">Lisa Wilson</div>
+                    <div class="expert-specialty">Product Development</div>
+                    <a href="#" class="btn btn-secondary">View Profile</a>
+                    <div class="expert-stats">176 answers · 91% helpful</div>
+                </div>
+                
+                <div class="expert-card">
+                    <img src="/api/placeholder/90/90" alt="Expert avatar" class="expert-avatar">
+                    <div class="expert-name">James Taylor</div>
+                    <div class="expert-specialty">Legal & Compliance</div>
+                    <a href="#" class="btn btn-secondary">View Profile</a>
+                    <div class="expert-stats">119 answers · 96% helpful</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

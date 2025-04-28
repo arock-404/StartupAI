@@ -1,0 +1,1478 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Strategy Generator</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #f72585;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #20232a;
+            --success: #06d6a0;
+            --warning: #ffb703;
+            --gradient-bg: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%234361ee' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Navigation Bar Styles */
+        .navbar {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .logo-icon {
+            margin-right: 12px;
+            font-size: 2rem;
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .auth-buttons a {
+            text-decoration: none;
+            margin-left: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .signup-btn {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .login-btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .signup-btn:hover {
+            background-color: #e5147a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .login-btn:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .main-content {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark);
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .questionnaire, .results {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .intro h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .intro p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .question:hover {
+            transform: translateX(5px);
+        }
+        
+        .question label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        
+        input[type="text"]:focus, textarea:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        button {
+            background: var(--gradient-bg);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 30px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .back-btn {
+            background: #e9ecef;
+            color: #495057;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .back-btn:hover {
+            background: #dee2e6;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .strategy-container {
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            border-left: 6px solid var(--primary);
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .strategy-container h3 {
+            color: var(--primary);
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .strategy-container ul {
+            padding-left: 20px;
+        }
+        
+        .strategy-container li {
+            margin-bottom: 10px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+        }
+        
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 6px solid rgba(67, 97, 238, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+        
+        .required-star {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .expert-suggestion {
+            display: flex;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f0f7fb;
+            border-radius: 12px;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .expert-suggestion:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .expert-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 25px;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .expert-info h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        .expert-info p {
+            margin: 0;
+            color: #555;
+        }
+        
+        /* Features section styles */
+        .features-section {
+            margin-top: 60px;
+            padding: 50px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .features-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            flex-basis: calc(33.33% - 25px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border-top: 5px solid transparent;
+        }
+        
+        .feature-card:nth-child(1) { border-top-color: #4361ee; }
+        .feature-card:nth-child(2) { border-top-color: #3a0ca3; }
+        .feature-card:nth-child(3) { border-top-color: #7209b7; }
+        .feature-card:nth-child(4) { border-top-color: #f72585; }
+        .feature-card:nth-child(5) { border-top-color: #4cc9f0; }
+        .feature-card:nth-child(6) { border-top-color: #4895ef; }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient-bg);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-card {
+                flex-basis: 100%;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                margin-bottom: 10px;
+            }
+            
+            .auth-buttons {
+                margin-top: 15px;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .auth-buttons a {
+                margin: 0;
+                text-align: center;
+                flex-basis: 48%;
+            }
+        }
+        
+        /* Footer styles */
+        .footer {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 60px 0 40px;
+            margin-top: 60px;
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex-basis: 23%;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-section {
+                flex-basis: 48%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-section {
+                flex-basis: 100%;
+            }
+        }
+        
+        /* Button styles */
+        #save-strategy-btn, #share-strategy-btn {
+            transition: all 0.3s;
+        }
+        
+        #save-strategy-btn {
+            background: linear-gradient(135deg, #06d6a0 0%, #0f8e79 100%);  
+        }
+        
+        #share-strategy-btn {
+            background: linear-gradient(135deg, #ffb703 0%, #fd9e02 100%);
+        }
+        
+        #save-strategy-btn:hover, #share-strategy-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        #start-btn {
+            animation: pulse 2s infinite;
+            font-size: 1.2rem;
+            padding: 16px 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">💼</span>
+                Startup Strategy AI
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="{%url 'index'%}">Home</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="{%url 'community_forum'%}">Community Forum</a></li>
+            </ul>
+            
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="login-btn">Log In</a>
+                <a href="{% url 'signup' %}" class="signup-btn">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div id="welcome" class="active">
+                <div class="intro">
+                    <h1>AI Business Strategy Generator</h1>
+                    <p>Answer a series of questions about your startup to receive a tailored business strategy powered by AI.</p>
+                </div>
+                <button id="start-btn">Start Questionnaire</button>
+            </div>
+            
+            <div id="questionnaire" class="questionnaire">
+                <br>
+                <div class="progress-bar">
+                    <div id="progress" class="progress"></div>
+                </div>
+                
+                <div id="question-container"></div>
+                
+                <div class="nav-buttons">
+                    <button id="back-btn" class="back-btn">Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <h3>Generating your personalized business strategy...</h3>
+                <p>Analyzing your answers and creating recommendations based on successful business models.</p>
+            </div>
+            
+            <div id="results" class="results">
+                <h1>Your Personalized Business Strategy</h1>
+                <div id="strategy-output" class="strategy-container"></div>
+                
+                <h2>Suggested Entrepreneurs to Follow</h2>
+                <div id="experts-container"></div>
+                
+                <div class="nav-buttons">
+                    <button id="restart-btn">Create Another Strategy</button>
+                    <button id="save-strategy-btn">Save Strategy</button>
+                    <button id="share-strategy-btn">Share Strategy</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features-section">
+            <div class="intro">
+                <h2>Why Use Our AI Strategy Generator?</h2>
+                <p>Unlock powerful insights to accelerate your startup's growth</p>
+            </div>
+            
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Data-Driven Insights</h3>
+                    <p>Strategies based on analysis of thousands of successful startups across different industries.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Save Time</h3>
+                    <p>Generate comprehensive business strategies in minutes instead of weeks of research.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Customized Roadmaps</h3>
+                    <p>Get action plans tailored to your specific industry, stage, and business goals.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Iterative Planning</h3>
+                    <p>Update your strategy as your business evolves and see how changes impact outcomes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Expert Network</h3>
+                    <p>Connect with relevant industry experts and mentors based on your business needs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access your business strategy anywhere, anytime from any device.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Startup Strategy AI</h3>
+                <p>Helping entrepreneurs build successful businesses with AI-powered strategies and insights.</p>
+                <div class="social-links">
+                    <a href="#"><span>📱</span></a>
+                    <a href="#"><span>💬</span></a>
+                    <a href="#"><span>📷</span></a>
+                    <a href="#"><span>🔗</span></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Strategy Templates</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Founder Stories</a></li>
+                    <li><a href="#">Startup Toolkit</a></li>
+                    <li><a href="#">Resource Library</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Mentorship</a></li>
+                    <li><a href="#">Partner Network</a></li>
+                    <li><a href="#">Success Stories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Startup Strategy AI. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    </div>
+            
+            <div class="copyright">
+                &copy; 2025 Startup Strategy AI. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script>
+        // The questions array
+        const questions = [
+    {
+        id: 'business_concept',
+        label: 'What is your startup idea? (e.g., "An app that helps people find local fitness trainers") <span class="required-star">*</span>',
+        type: 'textarea',
+        required: true
+    },
+    {
+        id: 'problem_statement',
+        label: 'What problem are you trying to solve? (e.g., "People struggle to find affordable and reliable fitness trainers in their area") <span class="required-star">*</span>',
+        type: 'textarea',
+        required: true
+    },
+    {
+        id: 'target_customers',
+        label: 'Who are your target customers? (e.g., "Busy professionals aged 25-40 who want to stay fit but don’t have time to go to the gym") <span class="required-star">*</span>',
+        type: 'textarea',
+        required: true
+    },
+    {
+        id: 'target_location',
+        label: 'Where will you launch your startup initially? (e.g., "New York City", "Major US cities", "Rural communities in Southeast Asia") <span class="required-star">*</span>',
+        type: 'textarea',
+        required: true
+    },
+    {
+        id: 'industry',
+        label: 'Which industry does your startup belong to? <span class="required-star">*</span>',
+        type: 'select',
+        options: [
+            'Technology/SaaS', 
+            'E-commerce/Retail', 
+            'Healthcare', 
+            'Finance/Fintech', 
+            'Education',
+            'Food & Beverage',
+            'Manufacturing',
+            'Transportation',
+            'Entertainment/Media',
+            'Real Estate',
+            'Other'
+        ],
+        required: true
+    },
+    {
+        id: 'competitors',
+        label: 'Who are your competitors? (e.g., "Other fitness apps like MyFitnessPal or Fitbit")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'unique_value',
+        label: 'What makes your solution unique? (e.g., "Our app connects users with trainers who offer personalized plans at affordable prices")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'revenue_model',
+        label: 'How will your business make money? (e.g., "We charge a subscription fee of $10/month for access to premium features")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'stage',
+        label: 'What stage is your startup in? <span class="required-star">*</span>',
+        type: 'select',
+        options: [
+            'Idea/Concept', 
+            'Prototype/MVP', 
+            'Pre-launch', 
+            'Early Revenue (< $10K/month)', 
+            'Growth Phase',
+            'Scaling ($100K+/month)'
+        ],
+        required: true
+    },
+    {
+        id: 'team',
+        label: 'Tell us about your team. (e.g., "I’m a software developer, and my co-founder is a fitness trainer")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'resources',
+        label: 'What resources do you currently have? (e.g., "We have $5,000 in savings and a basic prototype of the app")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'goals_short',
+        label: 'What are your goals for the next 3-6 months? (e.g., "Launch a beta version of the app and get feedback from 100 users") <span class="required-star">*</span>',
+        type: 'textarea',
+        required: true
+    },
+    {
+        id: 'goals_long',
+        label: 'What are your goals for the next 1-3 years? (e.g., "Expand to 10 cities and reach 10,000 active users") <span class="required-star">*</span>',
+        type: 'textarea',
+        required: true
+    },
+    {
+        id: 'challenges',
+        label: 'What challenges are you facing? (e.g., "We’re struggling to find a reliable developer to build the app")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'market_size',
+        label: 'How big is the market for your solution? (e.g., "The fitness app market is worth $4 billion globally")',
+        type: 'textarea',
+        required: false
+    },
+    {
+        id: 'marketing_plans',
+        label: 'How do you plan to reach your customers? (e.g., "We’ll use social media ads and partner with local gyms")',
+        type: 'textarea',
+        required: false
+    }
+];
+
+        // Industry-based expert suggestions
+        const industryExperts = {
+            'Technology/SaaS': [
+                { name: 'Marc Benioff', company: 'Salesforce', expertise: 'SaaS, Enterprise Software', image: '/api/placeholder/80/80' },
+                { name: 'Stewart Butterfield', company: 'Slack', expertise: 'Team Collaboration Tools', image: '/api/placeholder/80/80' }
+            ],
+            'E-commerce/Retail': [
+                { name: 'Tobi Lütke', company: 'Shopify', expertise: 'E-commerce Platforms', image: '/api/placeholder/80/80' },
+                { name: 'Emily Weiss', company: 'Glossier', expertise: 'D2C Business Models', image: '/api/placeholder/80/80' }
+            ],
+            'Healthcare': [
+                { name: 'Anne Wojcicki', company: '23andMe', expertise: 'Health Tech, Genomics', image: '/api/placeholder/80/80' },
+                { name: 'Glen Tullman', company: 'Livongo', expertise: 'Digital Health', image: '/api/placeholder/80/80' }
+            ],
+            'Finance/Fintech': [
+                { name: 'Kathryn Petralia', company: 'Kabbage', expertise: 'SMB Financing', image: '/api/placeholder/80/80' },
+                { name: 'Patrick Collison', company: 'Stripe', expertise: 'Payment Processing', image: '/api/placeholder/80/80' }
+            ],
+            'Education': [
+                { name: 'Sebastian Thrun', company: 'Udacity', expertise: 'Online Education', image: '/api/placeholder/80/80' },
+                { name: 'Sal Khan', company: 'Khan Academy', expertise: 'EdTech, Free Education', image: '/api/placeholder/80/80' }
+            ],
+            'Food & Beverage': [
+                { name: 'Hamdi Ulukaya', company: 'Chobani', expertise: 'Food Production, CPG', image: '/api/placeholder/80/80' },
+                { name: 'Julia Collins', company: 'Zume Pizza', expertise: 'Food Tech', image: '/api/placeholder/80/80' }
+            ],
+            'Other': [
+                { name: 'Sara Blakely', company: 'Spanx', expertise: 'Product Innovation, Bootstrapping', image: '/api/placeholder/80/80' },
+                { name: 'Brian Chesky', company: 'Airbnb', expertise: 'Marketplace Business Models', image: '/api/placeholder/80/80' }
+            ]
+        };
+
+        // Default experts for any industry not specifically covered
+        const defaultExperts = [
+            { name: 'Reid Hoffman', company: 'LinkedIn', expertise: 'Network Effects, Scaling', image: '/api/placeholder/80/80' },
+            { name: 'Aileen Lee', company: 'Cowboy Ventures', expertise: 'Early-stage Startups', image: '/api/placeholder/80/80' }
+        ];
+
+        let currentQuestion = 0;
+        const answers = {};
+
+        // DOM elements
+        const welcomeSection = document.getElementById('welcome');
+        const questionnaireSection = document.getElementById('questionnaire');
+        const loadingSection = document.getElementById('loading');
+        const resultsSection = document.getElementById('results');
+        const questionContainer = document.getElementById('question-container');
+        const progressBar = document.getElementById('progress');
+        const startBtn = document.getElementById('start-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const backBtn = document.getElementById('back-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const strategyOutput = document.getElementById('strategy-output');
+        const expertsContainer = document.getElementById('experts-container');
+
+        // Initialize
+        startBtn.addEventListener('click', startQuestionnaire);
+        nextBtn.addEventListener('click', nextQuestion);
+        backBtn.addEventListener('click', previousQuestion);
+        restartBtn.addEventListener('click', restart);
+
+        // Start questionnaire
+        function startQuestionnaire() {
+            welcomeSection.classList.remove('active');
+            questionnaireSection.classList.add('active');
+            renderQuestion();
+        }
+
+        // Render current question
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            questionContainer.innerHTML = '';
+        
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+        
+            // Create label
+            const label = document.createElement('label');
+            label.setAttribute('for', question.id);
+            label.innerHTML = `${currentQuestion + 1}. ${question.label}`; // Use innerHTML here
+            questionDiv.appendChild(label);
+        
+            // Create input based on type
+            if (question.type === 'select') {
+                const select = document.createElement('select');
+                select.id = question.id;
+        
+                // Add default empty option
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '-- Select an option --';
+                select.appendChild(defaultOption);
+        
+                // Add all options
+                question.options.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    if (answers[question.id] === option) {
+                        optionElement.selected = true;
+                    }
+                    select.appendChild(optionElement);
+                });
+        
+                questionDiv.appendChild(select);
+            } else if (question.type === 'textarea') {
+                const textarea = document.createElement('textarea');
+                textarea.id = question.id;
+                textarea.value = answers[question.id] || '';
+                questionDiv.appendChild(textarea);
+            } else {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = question.id;
+                input.value = answers[question.id] || '';
+                questionDiv.appendChild(input);
+            }
+        
+            questionContainer.appendChild(questionDiv);
+        
+            // Update progress bar
+            const progressPercentage = (currentQuestion / (questions.length - 1)) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        
+            // Update button text for last question
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.textContent = 'Generate Strategy';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+        
+            // Disable back button on first question
+            backBtn.disabled = currentQuestion === 0;
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            // Save current answer
+            const question = questions[currentQuestion];
+            const inputElement = document.getElementById(question.id);
+            
+            // Validate required fields
+            if (question.required && !inputElement.value) {
+                alert('This field is required. Please provide an answer.');
+                return;
+            }
+            
+            answers[question.id] = inputElement.value;
+            
+            // If last question, generate strategy
+            if (currentQuestion === questions.length - 1) {
+                generateStrategy();
+                return;
+            }
+            
+            // Move to next question
+            currentQuestion++;
+            renderQuestion();
+        }
+
+        // Move to previous question
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                // Save current answer before moving back
+                const question = questions[currentQuestion];
+                const inputElement = document.getElementById(question.id);
+                answers[question.id] = inputElement.value;
+                
+                // Move to previous question
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        // Generate business strategy
+        function generateStrategy() {
+            // Show loading screen
+            questionnaireSection.classList.remove('active');
+            loadingSection.style.display = 'block';
+            
+            // In a real application, you would call your AI service here
+            setTimeout(() => {
+                // Simulate API call to AI service
+                const strategy = mockAIStrategyGeneration(answers);
+                displayResults(strategy);
+            }, 2500); // Simulated delay for AI processing
+        }
+
+        // Mock AI strategy generation (in a real app, this would be your API call)
+        function mockAIStrategyGeneration(answers) {
+            // This is where you would format the answers into a prompt for your AI model
+            // For demo purposes, we'll generate a structured strategy based on the answers
+            
+            const industry = answers.industry;
+            const stage = answers.stage;
+            const concept = answers.business_concept;
+            const location = answers.target_location;
+            
+            // Generate executive summary with location
+            const executiveSummary = `
+                <h3>Executive Summary</h3>
+                <p>Based on your description, you are building ${concept} in the ${industry} industry, targeting ${location} as your initial market. 
+                You are currently in the ${stage} stage and targeting customers who ${answers.target_customers}.</p>
+                <p>Your solution addresses ${answers.problem_statement}, which represents a significant 
+                opportunity in a market estimated at ${answers.market_size}.</p>
+            `;
+            
+            // Generate market analysis with location insights
+            const marketAnalysis = `
+                <h3>Market Analysis</h3>
+                <p>The ${industry} market in ${location} presents specific challenges and opportunities for new entrants. 
+                Your identified market size of ${answers.market_size} suggests ${
+                    answers.market_size.toLowerCase().includes('billion') ? 'a large potential opportunity' : 
+                    answers.market_size.toLowerCase().includes('million') ? 'a moderate-sized opportunity' : 
+                    'a focused niche opportunity'
+                }.</p>
+                <p>Your primary competitors include ${answers.competitors}. Your unique value proposition 
+                of ${answers.unique_value} potentially positions you ${
+                    answers.unique_value.length > 100 ? 'very strongly' : 'adequately'
+                } against these competitors in ${location}.</p>
+                
+                <h4>Location-Specific Insights</h4>
+                <p>${generateLocationInsights(location, industry)}</p>
+            `;
+            
+            // Generate strategy recommendations with location considerations
+            const strategyRecommendations = `
+                <h3>Strategic Recommendations</h3>
+                <h4>Short-term Priorities (Next 3-6 Months)</h4>
+                <ul>
+                    <li>Focus on validating your solution with early customers in ${location} through ${
+                        stage.includes('Idea') ? 'concept testing and prototype development' :
+                        stage.includes('Prototype') ? 'user testing and gathering feedback' :
+                        stage.includes('Pre-launch') ? 'private beta testing with strategic partners' :
+                        'optimizing conversion and retention metrics'
+                    }</li>
+                    <li>Develop a comprehensive understanding of ${location}-specific customer acquisition channels based on your initial marketing approach of ${answers.marketing_plans}</li>
+                    <li>Address immediate challenges, particularly ${answers.challenges.split('.')[0]}</li>
+                    <li>${generateLocationSpecificShortTermAdvice(location, industry)}</li>
+                </ul>
+                
+                <h4>Medium-term Strategy (6-18 Months)</h4>
+                <ul>
+                    <li>${
+                        stage.includes('Idea') ? `Launch MVP in ${location} and acquire first paying customers` :
+                        stage.includes('Prototype') ? `Launch publicly in ${location} and establish product-market fit` :
+                        stage.includes('Pre-launch') ? `Scale customer acquisition in ${location} and optimize unit economics` :
+                        `Expand within ${location} and enhance product features`
+                    }</li>
+                    <li>Refine your revenue model based on ${answers.revenue_model}</li>
+                    <li>Build strategic partnerships in ${location} to accelerate growth</li>
+                    <li>${generateLocationSpecificMediumTermAdvice(location, industry)}</li>
+                </ul>
+                
+                <h4>Long-term Vision (18+ Months)</h4>
+                <ul>
+                    <li>Scale operations to achieve ${answers.goals_long}</li>
+                    <li>${generateExpansionStrategy(location)}</li>
+                    <li>${
+                        industry.includes('Technology') ? 'Explore platform expansion opportunities' :
+                        industry.includes('E-commerce') ? 'Consider vertical integration strategies' :
+                        industry.includes('Healthcare') ? 'Pursue regulatory approvals for broader applications' :
+                        'Develop additional revenue streams'
+                    }</li>
+                    <li>Prepare for potential funding rounds or strategic exits based on market position</li>
+                </ul>
+            `;
+            
+            // Generate resource allocation with location considerations
+            const resourceAllocation = `
+                <h3>Resource Allocation</h3>
+                <p>Given your current resources (${answers.resources}), team composition (${answers.team}), and focus on ${location}, 
+                we recommend the following resource allocation priorities:</p>
+                
+                <h4>Team Development</h4>
+                <p>${
+                    answers.team.length < 75 ? `Prioritize bringing on technical talent to accelerate product development, with emphasis on team members familiar with ${location} market` :
+                    answers.team.includes('technical') || answers.team.includes('developer') ? 
+                        `Focus on adding marketing and sales capabilities with local expertise in ${location} to drive customer acquisition` :
+                    `Balance technical and business development hires to support your growth objectives in ${location}`
+                }</p>
+                
+                <h4>Capital Allocation</h4>
+                <p>${
+                    stage.includes('Idea') || stage.includes('Prototype') ? 
+                        `Conserve capital and focus on achieving key milestones in ${location} before seeking additional funding` :
+                    stage.includes('Pre-launch') ? 
+                        `Allocate 60% to product development, 30% to initial ${location}-focused marketing, and 10% to operations` :
+                    stage.includes('Early Revenue') ?
+                        `Shift focus toward customer acquisition with 50% to ${location}-targeted marketing/sales, 30% to product, and 20% to operations` :
+                    `Invest in scaling operations, with 40% to marketing/sales in ${location}, 30% to product enhancement, and 30% to team expansion`
+                }</p>
+                
+                <h4>Local Operations</h4>
+                <p>${generateLocalOperationsAdvice(location, industry, stage)}</p>
+            `;
+            
+            // Generate risk assessment with location considerations
+            const riskAssessment = `
+                <h3>Risk Assessment</h3>
+                <h4>Primary Risk Factors</h4>
+                <ul>
+                    <li><strong>Market Risk:</strong> ${
+                        answers.market_size.toLowerCase().includes('uncertain') ? 'High - Market size is uncertain and requires validation' :
+                        answers.market_size.toLowerCase().includes('billion') ? 'Medium - Large markets attract well-funded competitors' :
+                        'Moderate - Niche markets may limit ultimate scale'
+                    }</li>
+                    <li><strong>Competitive Risk:</strong> ${
+                        answers.competitors.length > 100 ? 'High - Crowded market with established players' :
+                        answers.competitors.length > 50 ? 'Medium - Some competition but room for differentiation' :
+                        'Low - Limited direct competition currently identified'
+                    }</li>
+                    <li><strong>Execution Risk:</strong> ${
+                        answers.team.length < 50 ? 'High - Team capability gaps need to be addressed' :
+                        answers.team.includes('experience') ? 'Medium - Team has experience but may need specific expertise' :
+                        'Moderate - Experienced team but scaling challenges remain'
+                    }</li>
+                    <li><strong>Location-Specific Risk:</strong> ${generateLocationRisk(location, industry)}</li>
+                </ul>
+                
+                <h4>Mitigation Strategies</h4>
+                <p>To address the challenges you've identified (${answers.challenges}) within ${location}, consider these approaches:</p>
+                <ul>
+                    <li>Establish clear metrics for validating key business assumptions specific to ${location}</li>
+                    <li>Develop contingency plans for capital efficiency if growth in ${location} is slower than anticipated</li>
+                    <li>Create a formal competitive intelligence process to stay ahead of market developments in ${location}</li>
+                    <li>${generateLocationMitigationStrategy(location, industry)}</li>
+                </ul>
+            `;
+            
+            // Generate implementation roadmap with location considerations
+            const implementationRoadmap = `
+                <h3>Implementation Roadmap</h3>
+                <p>Based on your stated goals of achieving ${answers.goals_short} in the short term and 
+                ${answers.goals_long} in the long term, we recommend this location-focused implementation timeline:</p>
+                
+                <h4>Phase 1: Foundation (1-3 months)</h4>
+                <ul>
+                    <li>${
+                        stage.includes('Idea') ? `Develop MVP focused on ${location} market needs` :
+                        stage.includes('Prototype') ? `Refine product based on initial user feedback from ${location}` :
+                        stage.includes('Pre-launch') ? `Finalize product features for public launch in ${location}` :
+                        `Optimize core product experience based on ${location} user data`
+                    }</li>
+                    <li>Establish baseline metrics for measuring success in ${location}</li>
+                    <li>Develop initial marketing materials and messaging tailored to ${location} audience</li>
+                    <li>${generatePhase1LocationAdvice(location, industry)}</li>
+                </ul>
+                
+                <h4>Phase 2: Validation (3-6 months)</h4>
+                <ul>
+                    <li>Acquire first ${
+                        stage.includes('Idea') ? `10-20 beta users in ${location}` :
+                        stage.includes('Prototype') ? `50-100 early adopters in ${location}` :
+                        stage.includes('Pre-launch') ? `100-500 paying customers in ${location}` :
+                        `1,000+ active users in ${location}`
+                    }</li>
+                    <li>Validate core assumptions about customer acquisition cost and lifetime value in ${location}</li>
+                    <li>Iterate on product based on ${location} market feedback</li>
+                    <li>${generatePhase2LocationAdvice(location, industry)}</li>
+                </ul>
+                
+                <h4>Phase 3: Growth (6-12 months)</h4>
+                <ul>
+                    <li>Scale marketing efforts based on validated channels in ${location}</li>
+                    <li>Expand team to support growth objectives with local expertise</li>
+                    <li>${generatePhase3LocationAdvice(location, industry)}</li>
+                    <li>Consider ${
+                        answers.resources.includes('funding') ? 'additional funding rounds to accelerate expansion' :
+                        answers.resources.includes('profitable') ? `reinvesting profits into growth within ${location} and adjacent markets` :
+                        `strategic partnerships in ${location} to accelerate growth`
+                    }</li>
+                </ul>
+            `;
+            
+            // Combine all sections
+            return `
+                ${executiveSummary}
+                ${marketAnalysis}
+                ${strategyRecommendations}
+                ${resourceAllocation}
+                ${riskAssessment}
+                ${implementationRoadmap}
+            `;
+        }
+        
+        // Helper functions to generate location-specific advice
+        function generateLocationInsights(location, industry) {
+            // Determine what kind of location it is
+            const isCity = location.includes('City') || location.includes('city') || 
+                          location.includes('York') || location.includes('Angeles') || 
+                          location.includes('Chicago') || location.includes('Francisco');
+            
+            const isCountry = location.includes('US') || location.includes('United States') || 
+                             location.includes('China') || location.includes('India') || 
+                             location.includes('Europe') || location.includes('Japan');
+            
+            const isRegional = location.includes('Asia') || location.includes('Africa') || 
+                              location.includes('Europe') || location.includes('American') || 
+                              location.includes('Latin');
+            
+            const isRural = location.includes('rural') || location.includes('Rural') || 
+                           location.includes('village') || location.includes('community');
+            
+            // Generate location-specific insights based on industry and location type
+            if (industry === 'Technology/SaaS') {
+                if (isCity) {
+                    return `${location} offers a strong tech talent pool and networking opportunities. The local startup ecosystem provides potential for partnerships and investment.`;
+                } else if (isCountry) {
+                    return `${location} has a diverse tech landscape with varying levels of digital infrastructure and adoption rates. Consider regional differences in your rollout strategy.`;
+                } else if (isRegional) {
+                    return `Technology adoption varies significantly across ${location}. Consider a phased approach that accounts for infrastructure and digital literacy differences.`;
+                } else if (isRural) {
+                    return `Technology solutions in ${location} may face connectivity and digital literacy challenges. Focus on solutions that work with limited connectivity and provide clear value.`;
+                }
+            } else if (industry === 'E-commerce/Retail') {
+                if (isCity) {
+                    return `${location} offers high population density and typically strong logistics infrastructure, allowing for rapid delivery options and higher customer lifetime value.`;
+                } else if (isCountry || isRegional) {
+                    return `E-commerce in ${location} requires understanding regional logistics networks, payment preferences, and consumer shopping behaviors that may vary significantly.`;
+                } else if (isRural) {
+                    return `E-commerce in ${location} may require innovative logistics solutions and consideration of limited delivery infrastructure.`;
+                }
+            } else if (industry === 'Healthcare') {
+                if (isCity) {
+                    return `${location} likely has multiple healthcare institutions that could be potential partners or customers. Consider existing healthcare infrastructure in your approach.`;
+                } else if (isCountry || isRegional) {
+                    return `Healthcare regulations and systems in ${location} may vary widely. A thorough understanding of local compliance requirements is essential.`;
+                } else if (isRural) {
+                    return `Healthcare solutions in ${location} should address accessibility challenges and potential limited specialist availability.`;
+                }
+            }
+            
+            // Default response if none of the specific conditions match
+            return `${location} has unique characteristics that will impact your business model. Research local market conditions, consumer preferences, and regulatory requirements specific to your industry in this area.`;
+        }
+        
+        function generateLocationSpecificShortTermAdvice(location, industry) {
+            // Sample location-specific short-term advice based on industry
+            if (industry === 'Technology/SaaS') {
+                return `Engage with local tech meetups and startup communities in ${location} to build initial awareness and get feedback.`;
+            } else if (industry === 'E-commerce/Retail') {
+                return `Test shipping logistics and fulfillment processes specific to ${location} to ensure reliable delivery experiences.`;
+            } else if (industry === 'Healthcare') {
+                return `Research ${location}-specific healthcare regulations and compliance requirements that may affect your solution.`;
+            } else if (industry === 'Food & Beverage') {
+                return `Test your concept with pop-up experiences or limited releases in high-traffic areas of ${location}.`;
+            } else {
+                return `Build relationships with key stakeholders and potential early adopters in ${location}.`;
+            }
+        }
+        
+        function generateLocationSpecificMediumTermAdvice(location, industry) {
+            // Sample location-specific medium-term advice
+            if (industry === 'Technology/SaaS') {
+                return `Consider establishing a local presence or hiring remote team members based in ${location} to deepen market understanding.`;
+            } else if (industry === 'E-commerce/Retail') {
+                return `Optimize your supply chain for ${location} by establishing strategic inventory positions or partnerships with local suppliers.`;
+            } else {
+                return `Develop location-specific features or services that address unique needs in ${location}.`;
+            }
+        }
+        
+        function generateExpansionStrategy(location) {
+            // Determine expansion strategy based on initial location
+            const isCity = location.includes('City') || location.includes('city');
+            const isCountry = location.includes('US') || location.includes('United States') || 
+                             location.includes('China') || location.includes('India');
+            
+            if (isCity) {
+                return `Expand from ${location} to similar metropolitan areas with comparable demographics and market conditions.`;
+            } else if (isCountry) {
+                return `After establishing a strong presence in ${location}, consider expansion to adjacent international markets with similar characteristics.`;
+            } else {
+                return `Consider a hub-and-spoke expansion model, deepening penetration in ${location} while strategically entering new markets.`;
+            }
+        }
+        
+        function generateLocalOperationsAdvice(location, industry, stage) {
+            // Generate advice about local operations
+            if (stage.includes('Idea') || stage.includes('Prototype')) {
+                return `At this early stage, leverage co-working spaces or virtual office solutions in ${location} to maintain flexibility while keeping costs low.`;
+            } else if (stage.includes('Pre-launch') || stage.includes('Early Revenue')) {
+                return `Consider establishing a small physical presence in ${location} to facilitate customer meetings, team collaboration, and local networking.`;
+            } else {
+                return `Invest in building a strong local team in ${location} with cultural and market expertise to drive growth and customer relationships.`;
+            }
+        }
+        
+        function generateLocationRisk(location, industry) {
+            // Generate location-specific risk assessment
+            const isInternational = !location.includes('US') && !location.includes('United States');
+            const isCity = location.includes('City') || location.includes('city');
+            const isRural = location.includes('rural') || location.includes('Rural');
+            
+            if (isInternational) {
+                return `Medium to High - International operations in ${location} may involve currency risks, regulatory complexities, and cultural adaption challenges.`;
+            } else if (isCity) {
+                return `Medium - Urban markets like ${location} often have higher competition and customer acquisition costs, but offer larger addressable markets.`;
+            } else if (isRural) {
+                return `Medium - Rural markets like ${location} may have limited infrastructure and smaller addressable markets, but potentially less competition.`;
+            } else {
+                return `Varies - Success in ${location} will depend on local competitive landscape, regulatory environment, and market readiness.`;
+            }
+        }
+        
+        function generateLocationMitigationStrategy(location, industry) {
+            // Generate location-specific risk mitigation strategies
+            const isInternational = !location.includes('US') && !location.includes('United States');
+            
+            if (isInternational) {
+                return `Partner with local experts or advisors familiar with ${location}'s business environment to navigate cultural and regulatory nuances.`;
+            } else {
+                return `Develop a deep understanding of customer behavior patterns specific to ${location} through focused market research and customer interviews.`;
+            }
+        }
+        
+        function generatePhase1LocationAdvice(location, industry) {
+            // Generate location-specific Phase 1 advice
+            return `Identify and engage with key influencers and community gatekeepers in ${location} who can provide valuable feedback and connections.`;
+        }
+        
+        function generatePhase2LocationAdvice(location, industry) {
+            // Generate location-specific Phase 2 advice
+            return `Develop case studies and success stories from early adopters in ${location} to use in your marketing and business development efforts.`;
+        }
+        
+        function generatePhase3LocationAdvice(location, industry) {
+            // Generate location-specific Phase 3 advice
+            const isCity = location.includes('City') || location.includes('city');
+            
+            if (isCity) {
+                return `Begin planning expansion to adjacent markets or neighborhoods based on learnings from ${location}.`;
+            } else {
+                return `Identify high-potential submarkets within ${location} for focused growth initiatives.`;
+            }
+        }
+
+        // Display results
+        function displayResults(strategy) {
+            loadingSection.style.display = 'none';
+            resultsSection.classList.add('active');
+            
+            // Display strategy
+            strategyOutput.innerHTML = strategy;
+            
+            // Display expert suggestions based on industry
+            const selectedIndustry = answers.industry;
+            const experts = industryExperts[selectedIndustry] || defaultExperts;
+            
+            expertsContainer.innerHTML = '';
+            experts.forEach(expert => {
+                const expertDiv = document.createElement('div');
+                expertDiv.classList.add('expert-suggestion');
+                
+                expertDiv.innerHTML = `
+                    <img src="${expert.image}" alt="${expert.name}" class="expert-img">
+                    <div class="expert-info">
+                        <h4>${expert.name} - ${expert.company}</h4>
+                        <p>Expertise: ${expert.expertise}</p>
+                    </div>
+                `;
+                
+                expertsContainer.appendChild(expertDiv);
+            });
+        }
+
+        // Restart the process
+        function restart() {
+            // Reset everything
+            currentQuestion = 0;
+            answers = {};
+            
+            // Hide results, show welcome
+            resultsSection.classList.remove('active');
+            welcomeSection.classList.add('active');
+        }
+
+        
+    </script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
+
+            
